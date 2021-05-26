@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        var A, B, C, x1, x2;
+        function procesoEcuacion()
+        {
+            obtenerDatos();
+            obtenerEcuacion();
+            presentarDatos();
+        }
+        function obtenerDatos()
+        {
+            A = parseFloat(document.getElementById("inputA").value);
+            B = parseFloat(document.getElementById("inputB").value);
+            C = parseFloat(document.getElementById("inputC").value);
+            //alert("Los datos fueron introducidos");
+            if (isNaN(A)==true || isNaN(B) == true || isNaN(C) == true)
+            {
+                alert("No se introdujo ninguna variable")
+                throw new Error("No se introdujo ninguna variable")
+            }
+        }
+        function obtenerEcuacion()
+        {
+            var r=((B*B)-(4*A*C));
+            if(r<0)
+            {
+                let aux1,aux2;
+                aux1 = (-B/(2*A));
+                aux2= Math.sqrt(-r)/(2*A);
+                x1=aux1.toString()+"+"+aux2.toString()+"i";
+                x2=aux1.toString()+"-"+aux2.toString()+"i";
+            }
+            else
+            {
+                x1=(-B + Math.sqrt(r))/(2*A);
+                x1=x1.toString();
+                x2=(-B - Math.sqrt(r))/(2*A);
+                x2=x2.toString();
+            }
+        }
+        function presentarDatos()
+        {
+            let text="<div class='row'> <div class='col'>X1: <br>";
+            text += x1;
+            text += "</div><div class='col'>X2:<br>";
+            text += x2;
+            text += "</div>";
+            document.getElementById("ContenedorResultados").innerHTML=text;
+        }
+        function quitaDatos()
+        {
+            document.getElementById("ContenedorResultados").innerHTML=null;
+        }
+    </script>
+    <style>
+        body
+        {
+            background-color:lightblue;
+        }
+        #Espacio
+        {
+            background-color: lightblue;
+        }
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+        footer {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: auto;
+            width: 100%;
+        }
+    </style>
+    <title>Ecuaciones de Segundo Grado</title>
+</head>
+<body>
+    <div class="container bg-primary text-white text-center">
+        <h1>Solución de Ecuaciones de Segundo Grado</h1>
+    </div>
+    
+    <div class="container bg-primary text-white text-center ">
+        <form>
+            <div class="row">
+                <div class="col sm-3">
+                    Ax<sup>2</sup><br>
+                    <input type="text" id="inputA" value=""><br>
+                </div>
+                <div class="col sm-1"><br>+</div>
+                <div class="col sm-3">
+                    Bx <br>
+                    <input type="text" id="inputB" value=""><br>
+                    
+                </div>
+                <div class="col sm-1"><br>+</div>
+                <div class="col sm-3">
+                    C<br>
+                    <input type="text" id="inputC" value=""><br>
+                </div>
+                <div class="col sm-1"><br>=</div>
+                <div class="col sm-3"><br>0</div>
+            </div><br>
+            <div class="row">
+                <div class="col">
+                    <input type="button" value="Calcular" onclick="procesoEcuacion()">
+                </div>
+                <div class="col">
+                    <input type="reset" onclick="quitaDatos()">
+                </div>
+            </div><br>
+        </form>
+    </div>
+
+    <div class="container bg-info text-white text-center" id="ContenedorResultados">
+        <!-- 
+        <div class="row">
+            <div class="col"><label id="printx1"></label></div>
+            <div class="col"><label id="printx2"></label></div>
+        </div>
+        -->
+    </div>
+    <footer style="background-color: white">
+        <p class="text-dark-30">
+            Luis Manuel Vila Solis<br>
+            8CM11
+        <p>
+
+    </footer>
+</body>
+</html>
